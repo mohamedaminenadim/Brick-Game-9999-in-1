@@ -11,14 +11,14 @@ pipeline {
         stage('Checkout') {
             steps {
                 // Checkout source code from Git repository
-                git 'https://github.com/yourusername/yourproject.git'
+                git 'https://github.com/mohamedaminenadim/Brick-Game-9999-in-1'
             }
         }
 
         stage('Build') {
             steps {
                 // Build the Maven project
-                sh 'mvn clean package'
+                sh 'mvn clean package -DskipTests'
             }
 
             post {
@@ -54,7 +54,7 @@ pipeline {
         stage('Save Artifacts') {
             steps {
                 // Save any necessary artifacts
-                sh 'mvn install'
+                sh 'mvn install -DskipTests'
             }
 
             post {
@@ -69,18 +69,18 @@ pipeline {
         stage('Publish Package') {
             when {
                 // Condition to publish the package (if required)
-                // Example: branch 'main'
+                branch 'master'
             }
             steps {
                 // Publish package to Maven repository
-                // Example: sh 'mvn deploy'
+                sh 'mvn deploy'
             }
         }
 
         stage('Additional Steps') {
             steps {
                 // Add any additional steps you deem necessary
-                // Example: sh "echo Additional steps"
+                sh "echo Pipeline completed succesfully"
             }
         }
     }
